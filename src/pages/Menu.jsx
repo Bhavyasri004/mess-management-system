@@ -1,60 +1,110 @@
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Menu.css";
 
 function Menu() {
-  const todayMenu = [
-    {
-      id: 1,
-      title: "Healthy Breakfast",
-      time: "7:00 AM - 9:00 AM",
-      type: "Breakfast",
-      rating: "4.5",
-      items: ["Oatmeal with Fruits", "Toast & Butter", "Fresh Orange Juice"],
-    },
-    {
-      id: 2,
-      title: "Nutritious Lunch",
-      time: "12:00 PM - 2:00 PM",
-      type: "Lunch",
-      rating: "4.7",
-      items: ["Rice", "Dal Tadka", "Mixed Vegetable", "Chapati"],
-    },
-    {
-      id: 3,
-      title: "Wholesome Dinner",
-      time: "7:00 PM - 9:00 PM",
-      type: "Dinner",
-      rating: "4.6",
-      items: ["Jeera Rice", "Paneer Curry", "Roti", "Sweet Dish"],
-    },
-  ];
+  const [menu, setMenu] = useState(null);
+  const [view, setView] = useState("daily");
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/menu")
+      .then(res => res.json())
+      .then(data => {
+        setMenu(data);
+      })
+      .catch(err => console.error(err));
+  }, []);
+
+  if (!menu) {
+    return <h2 style={{ textAlign: "center" }}>Loading Menu...</h2>;
+  }
+
+  // Safe fallback
+  const dailyMenu = menu.daily || {};
+  const weeklyMenu = menu.weekly || {};
+  const days = Object.keys(weeklyMenu);
 
   return (
     <div className="todays-menu">
-      <h1>Today's Menu</h1>
-      <p>Fresh, nutritious meals prepared with care for your health and taste</p>
+      <h1>Mess Menu</h1>
 
-      <div className="menu-cards">
-        {todayMenu.map((meal) => (
-          <div key={meal.id} className="meal-card">
-            <div className="meal-header">
-              <h2>{meal.title}</h2>
-              <span className="tag">Today</span>
-            </div>
-            <p className="meal-time">⏰ {meal.time}</p>
-            <p className="meal-rating">⭐ {meal.rating}</p>
-            <span className="meal-type">{meal.type}</span>
-            <ul>
-              {meal.items.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      {/* Toggle Buttons */}
+      <div className="menu-toggle">
+        <button
+          className={view === "daily" ? "active" : ""}
+          onClick={() => setView("daily")}
+        >
+          Today's Menu
+        </button>
+
+        <button
+          className={view === "weekly" ? "active" : ""}
+          onClick={() => setView("weekly")}
+        >
+          Weekly Menu
+        </button>
       </div>
+{/* DAILY MENU - TABLE FORMAT */}
+{view === "daily" && (
+  <div className="weekly-table-container">
+    {Object.entries(dailyMenu).length === 0 ? (
+      <p style={{ textAlign: "center" }}>No daily menu available</p>
+    ) : (
+      <table className="weekly-table">
+        <thead>
+          <tr>
+            <th>Meal Type</th>
+            <th>Items</th>
+          </tr>
+        </thead>
 
-      <button className="full-menu-btn">View Full Menu →</button>
+        <tbody>
+          {Object.entries(dailyMenu).map(([meal, items]) => (
+            <tr key={meal}>
+              <td className="meal-name">{meal.toUpperCase()}</td>
+              <td>{(items || []).join(", ")}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )}
+  </div>
+)}
+
+      
+
+      {/* WEEKLY MENU - TABLE FORMAT */}
+      {view === "weekly" && (
+        <div className="weekly-table-container">
+          {days.length === 0 ? (
+            <p style={{ textAlign: "center" }}>No weekly menu available</p>
+          ) : (
+            <table className="weekly-table">
+              <thead>
+                <tr>
+                  <th>Meal / Day</th>
+                  {days.map(day => (
+                    <th key={day}>{day}</th>
+                  ))}
+                </tr>
+              </thead>
+
+              <tbody>
+                {["breakfast", "lunch", "snacks", "dinner"].map(meal => (
+                  <tr key={meal}>
+                    <td className="meal-name">{meal.toUpperCase()}</td>
+
+                    {days.map(day => (
+                      <td key={day}>
+                        {(weeklyMenu[day]?.[meal] || []).join(", ")}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      )}
     </div>
   );
 }

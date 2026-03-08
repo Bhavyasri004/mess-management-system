@@ -64,7 +64,7 @@ function Footer() {
           <h4>Contact Info</h4>
           <p>College Campus, City</p>
           <p>📞 +1 (555) 123-4567</p>
-          <p>📧 mess@college.edu</p>
+          <p>📧 SVECWmess@college.edu</p>
         </div>
       </div>
       <div className="footer-bottom">

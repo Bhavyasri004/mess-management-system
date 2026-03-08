@@ -7,19 +7,40 @@ import Menu from "./pages/Menu";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Login from "./pages/Login";
+import FullMenu from "./pages/FullMenu";
+import Feedback from "./pages/FeedBack";
+import AdminDashboard from "./pages/AdminDashboard";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
     <Router>
       <Navbar />
+
       <Routes>
+
+        {/* Home page first */}
         <Route path="/" element={<Home />} />
+
         <Route path="/menu" element={<Menu />} />
+
         <Route path="/contact" element={<Contact />} />
+
         <Route path="/about" element={<About />} />
+
         <Route path="/login" element={<Login />} />
+
+        <Route path="/signup" element={<Signup />} />
+
+        <Route path="/fullmenu" element={<FullMenu />} />
+
+        <Route path="/feedback" element={<Feedback />} />
+
+        <Route path="/admin" element={<AdminDashboard />} />
+
       </Routes>
-      <Footer/>
+
+      <Footer />
     </Router>
   );
 }

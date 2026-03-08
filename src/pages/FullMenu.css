@@ -1,0 +1,65 @@
+.full-menu-container {
+  padding: 40px;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.full-menu-container h1 {
+  margin-bottom: 30px;
+  color: #1b5e20;
+  font-size: 36px; /* Large heading */
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  font-size: 20px; /* Big font for all cells */
+}
+
+.menu-table th,
+.menu-table td {
+  border: 2px solid #1b5e20; /* Thicker border */
+  padding: 25px; /* Bigger cells */
+  text-align: center;
+  min-width: 150px; /* Prevent squeezed columns */
+}
+
+/* Column headings (Mon-Sun) */
+.menu-table th {
+  background-color: #1b5e20;
+  color: white;
+  font-size: 24px; /* Bigger than normal cells */
+  padding: 28px;
+  text-transform: uppercase;
+}
+
+/* Meal type row headers (Breakfast, Lunch, Snacks, Dinner) */
+.meal-type {
+  font-weight: bold;
+  background-color: #388e3c;
+  color:Black;
+  text-align: left;
+  font-size: 30px; /* Same size as day headings */
+  padding-left: 20px;
+}
+
+/* Alternate row colors */
+.menu-table tr:nth-child(odd) td {
+  background-color: #f1f8e9;
+}
+
+.menu-table tr:nth-child(even) td {
+  background-color: #ffffff;
+}
+
+/* Hover effect */
+.menu-table tr:hover td {
+  background-color: #dcedc8;
+  transition: 0.3s;
+}

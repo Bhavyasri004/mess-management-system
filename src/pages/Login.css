@@ -1,54 +1,77 @@
+/* Full page background */
 .login-container {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
-  background: #f4f6f7;
+  background: url("https://images.unsplash.com/photo-1504754524776-8f4f37790ca0") no-repeat center center/cover;
+  font-family: Arial, sans-serif;
 }
 
+/* Bigger card design */
 .login-card {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  width: 350px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 60px; /* more padding */
+  border-radius: 18px;
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+  width: 600px;   /* EXTRA width */
   text-align: center;
 }
 
 .login-card h2 {
-  margin-bottom: 20px;
-  color: #145a32;
+  margin-bottom: 30px;
+  color: #1b5e20;
+  font-size: 34px; /* Bigger title */
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 28px;
   text-align: left;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 6px;
   font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 18px; /* Bigger label */
 }
 
 .form-group input {
   width: 100%;
-  padding: 10px;
+  padding: 16px; /* Bigger input fields */
+  border-radius: 10px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  font-size: 18px; /* Bigger text */
 }
 
 .login-btn {
-  background: #145a32;
+  background-color: #1b5e20;
   color: white;
-  padding: 10px 15px;
   border: none;
-  border-radius: 6px;
+  padding: 18px 22px; /* Bigger button */
+  border-radius: 10px;
   cursor: pointer;
   width: 100%;
-  font-size: 16px;
+  font-size: 20px; /* Bigger text */
+  font-weight: bold;
+  transition: background 0.3s;
 }
 
 .login-btn:hover {
-  background: #117a39;
+  background-color: #388e3c;
+}
+.admin-btn{
+  margin-top:10px;
+  width:100%;
+  padding:10px;
+  background:#444;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.admin-btn:hover{
+  background:#222;
 }
