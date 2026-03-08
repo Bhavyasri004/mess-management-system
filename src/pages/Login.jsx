@@ -50,7 +50,7 @@ function Login() {
       alert("User Login Successful");
 
       // ⭐ Save login record in backend (NEW PART)
-      fetch("http://localhost:5000/api/userlogs", {
+      fetch("https://mess-management-system-4.onrender.com/api/userlogs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

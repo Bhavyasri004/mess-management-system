@@ -6,7 +6,7 @@ function Menu() {
   const [view, setView] = useState("daily");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/menu")
+    fetch("https://mess-management-system-4.onrender.com/api/userlogs")
       .then(res => res.json())
       .then(data => {
         setMenu(data);
