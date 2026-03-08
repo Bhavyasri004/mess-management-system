@@ -87,7 +87,7 @@ function AdminDashboard() {
       .then(res => res.json())
       .then(data => setUsers(data));
 
-    fetch(`https://mess-management-system-6.onrender.com/api/userlogs?filter=${filter}`)
+    fetch(`https://mess-management-system-6.onrender.com/api/feedback?filter=${filter}`)
       .then(res => res.json())
       .then(data => setFeedbacks(data));
 
