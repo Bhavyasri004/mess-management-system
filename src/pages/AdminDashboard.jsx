@@ -92,18 +92,23 @@ function AdminDashboard() {
       .then(data => setFeedbacks(data));
 
   }, [filter]);
+const updateWeekly = (day, field, value) => {
 
-  const updateWeekly = (day, field, value) => {
+  const items = value
+    .split(",")
+    .map(item => item.trim())
+    .filter(item => item !== "");
 
-    setWeekly({
-      ...weekly,
-      [day]: {
-        ...weekly[day],
-        [field]: value
-      }
-    });
+  setWeekly({
+    ...weekly,
+    [day]: {
+      ...weekly[day],
+      [field]: items
+    }
+  });
 
-  };
+};
+  
 
   const saveMenu = () => {
 
