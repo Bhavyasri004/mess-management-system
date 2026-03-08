@@ -35,7 +35,7 @@ function Feedback() {
 
     try {
 
-      const response = await fetch("https://mess-management-system-4.onrender.com/api/feedback", {
+      const response = await fetch("https://mess-management-system-6.onrender.com/api/feedback", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

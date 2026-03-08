@@ -46,7 +46,7 @@ function AdminDashboard() {
   /* Load saved menu from backend */
   useEffect(() => {
 
-    fetch("https://mess-management-system-4.onrender.com/api/menu")
+    fetch("https://mess-management-system-6.onrender.com/api/menu")
       .then(res => res.json())
       .then(data => {
 
@@ -83,11 +83,11 @@ function AdminDashboard() {
   /* Load users and feedback */
   useEffect(() => {
 
-    fetch("https://mess-management-system-4.onrender.com/api/userlogs")
+    fetch("https://mess-management-system-6.onrender.com/api/userlogs")
       .then(res => res.json())
       .then(data => setUsers(data));
 
-    fetch(`https://mess-management-system-4.onrender.com/api/userlogs?filter=${filter}`)
+    fetch(`https://mess-management-system-6.onrender.com/api/userlogs?filter=${filter}`)
       .then(res => res.json())
       .then(data => setFeedbacks(data));
 
@@ -107,7 +107,7 @@ function AdminDashboard() {
 
   const saveMenu = () => {
 
-    fetch("https://mess-management-system-4.onrender.com/api/menu", {
+    fetch("https://mess-management-system-6.onrender.com/api/menu", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
