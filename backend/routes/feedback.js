@@ -40,11 +40,22 @@ router.post("/", async (req, res) => {
 // Get feedback
 router.get("/", async (req, res) => {
   try {
-    const feedbacks = await Feedback.find({});
+
+    const feedbacks = await Feedback.find();
+
+    console.log("Feedback fetched:", feedbacks);
+
     res.json(feedbacks);
+
   } catch (error) {
-    console.error("Error fetching feedback:", error);
-    res.status(500).json({ message1: "Error fetching feedback" });
+
+    console.error("REAL ERROR:", error);
+
+    res.status(500).json({
+      message: "Error fetching feedback",
+      error: error.message
+    });
+
   }
 });
 
