@@ -44,7 +44,7 @@ router.get("/", async (req, res) => {
     res.json(feedbacks);
   } catch (error) {
     console.error("Error fetching feedback:", error);
-    res.status(500).json({ message: "Error fetching feedback" });
+    res.status(500).json({ message1: "Error fetching feedback" });
   }
 });
 
