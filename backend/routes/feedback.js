@@ -4,45 +4,53 @@ const Feedback = require("../models/Feedback");
 
 // Save feedback
 router.post("/", async (req, res) => {
-
   try {
 
-    console.log("Received feedback:", req.body);
-
-    const feedback = new Feedback({
-      name: req.body.name,
-      meal: req.body.meal,
-      feedback: req.body.feedback,
-      comments: req.body.comments
-    });
-
+    const feedback = new Feedback(req.body);
     await feedback.save();
 
-    console.log("Feedback saved to MongoDB");
+    console.log("Feedback saved:", feedback);
 
-    res.json({
-      message: "Feedback saved successfully"
-    });
+    res.json({ message: "Feedback saved successfully" });
 
   } catch (error) {
 
     console.error("Error saving feedback:", error);
 
-    res.status(500).json({
-      message: "Error saving feedback"
-    });
+    res.status(500).json({ message: "Error saving feedback" });
 
   }
-
 });
 
 
-// Get feedback
+// Get feedback (with filter support)
 router.get("/", async (req, res) => {
 
   try {
 
-    const feedbacks = await Feedback.find().sort({ date: -1 });
+    const { filter } = req.query;
+
+    let query = {};
+
+    if (filter === "today") {
+
+      const today = new Date();
+      today.setHours(0,0,0,0);
+
+      query = { date: { $gte: today } };
+
+    }
+
+    if (filter === "week") {
+
+      const weekAgo = new Date();
+      weekAgo.setDate(weekAgo.getDate() - 7);
+
+      query = { date: { $gte: weekAgo } };
+
+    }
+
+    const feedbacks = await Feedback.find(query).sort({ date: -1 });
 
     res.json(feedbacks);
 
@@ -50,9 +58,7 @@ router.get("/", async (req, res) => {
 
     console.error("Error fetching feedback:", error);
 
-    res.status(500).json({
-      message: "Error fetching feedback"
-    });
+    res.status(500).json({ message: "Error fetching feedback" });
 
   }
 
