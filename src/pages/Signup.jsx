@@ -12,9 +12,31 @@ function Signup() {
     password: ""
   });
 
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value
+    });
+  };
+
   const handleSignup = () => {
 
-    localStorage.setItem("user", JSON.stringify(user));
+    if (
+      !user.regno.trim() ||
+      !user.email.trim() ||
+      !user.password.trim()
+    ) {
+      alert("Please fill all the fields");
+      return;
+    }
+
+    // Save student details
+    localStorage.setItem(
+      "user",
+      JSON.stringify(user)
+    );
+
+    console.log("Saved student:", user);
 
     alert("Signup successful!");
 
@@ -26,33 +48,46 @@ function Signup() {
 
       <div className="signup-card">
 
-        <h2>Sign Up</h2>
+        <h2>Student Sign Up</h2>
 
         <input
+          type="text"
+          name="regno"
           placeholder="Registration Number"
-          onChange={(e)=>setUser({...user, regno:e.target.value})}
+          value={user.regno}
+          onChange={handleChange}
         />
 
         <input
-          placeholder="Email"
-          onChange={(e)=>setUser({...user, email:e.target.value})}
+          type="email"
+          name="email"
+          placeholder="College Email"
+          value={user.email}
+          onChange={handleChange}
         />
 
         <input
           type="password"
+          name="password"
           placeholder="Password"
-          onChange={(e)=>setUser({...user, password:e.target.value})}
+          value={user.password}
+          onChange={handleChange}
         />
 
-        <button className="signup-btn" onClick={handleSignup}>
+        <button
+          className="signup-btn"
+          onClick={handleSignup}
+        >
           Sign Up
         </button>
 
         <p className="login-link">
           Already have an account?{" "}
-          <span onClick={()=>navigate("/login")}>
+
+          <span onClick={() => navigate("/login")}>
             Login
           </span>
+
         </p>
 
       </div>

@@ -42,20 +42,41 @@ router.get("/today", async (req, res) => {
 // POST menu (Admin updates menu)
 router.post("/", async (req, res) => {
   try {
-    console.log("Received menu data:", req.body);
+    console.log(
+      "Received menu data:",
+      JSON.stringify(req.body, null, 2)
+    );
 
-    // delete previous menu so only latest menu exists
-    await Menu.deleteMany();
+    let menu = await Menu.findOne();
 
-    const menu = new Menu(req.body);
-    await menu.save();
+    if (menu) {
+      menu.daily = req.body.daily;
+      menu.weekly = req.body.weekly;
+
+      await menu.save();
+    } else {
+      menu = new Menu({
+        daily: req.body.daily,
+        weekly: req.body.weekly
+      });
+
+      await menu.save();
+    }
 
     console.log("Menu saved to MongoDB");
 
-    res.json({ message: "Menu updated successfully" });
+    res.status(200).json({
+      message: "Menu updated successfully",
+      menu
+    });
+
   } catch (error) {
-    console.error("Error saving menu:", error);
-    res.status(500).json({ message: "Error saving menu" });
+    console.error("❌ ERROR SAVING MENU:", error);
+
+    res.status(500).json({
+      message: "Error saving menu",
+      error: error.message
+    });
   }
 });
 
